@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DropDown</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    <h1><center>How to Create Cascading/Dependent Dropdown List in Django python</center></h1>
+
+  <div class="container">
+  <div class="card body">
+    <br/>
+    <br/>
+    <br/>
+
+    <div class="row">
+    <div class="col-md-4">
+        <form method="post" action="">
+
+            <h1>Registeration Form</h1>
+            <hr color="black">
+            <label>Name </label>
+            <input type="text" name="Name" placeholder="Enter Your Name">
+                <br>
+            <label>DOB</label>
+            <input type="date" name="DOB" Placeholder="Enter your Date Of Birth "><br>
+                       <label>Age    </label>
+            <input type="number" name="Age" placeholder="Enter Your Age"><br>
+            <label> Gender:</label>
+            Male<input type="radio" name="Male" value="male">
+            Female<input type="radio" name="Male" value="female">
+            Tranmen<input type="radio" name="Transmen" value="transmen">
+            Transwoman<input type="radio" name="Transwomen" value="Transwomen"><br>
+            <label for="phone"> Phone number:</label>
+            <input type="tel" id="phone" name="phone" placeholder="Enter phone Number" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"><br>
+             <label>Email</label>
+            <input type="Email" name="Email" Placeholder="Enter Your Email "><br>
+            <label>Address </label>
+            <input type="text" name="Name" placeholder="Enter Your Address" maxlength="200">
+
+            <label> District:</label>
+            <select name="dept" id="department" class="form-control">
+            <option value="0">--Select District--</option>
+            {% for item in department  %}
+            <option value="{{ item.id }}">{{ item.districtname }}</option>
+            {% endfor %}
+            </select>
+            <label> City:</label>
+              <select name="emp" id="Employee" class="form-control">
+            <option value="0">--Select Branch--</option>
+            {% for item in employee  %}
+            <option value="{{ item.distid_id }}">{{ item.branchname }}</option>
+            {% endfor %}
+            </select>
+
+             <label>Account Type:</label>
+            <select id="type" name="type_acc">
+            <option value="Savings">Savings Account</option>
+            <option value="current">Current Account</option>
+            <option value="fixed">Fixed deposit</option>
+            <option value="joint">Joint account</option>
+             <option value="recurring">Recurring deposit</option>
+            </select><br>
+
+            <label>Materials Provide:</label><br>
+            <input type="checkbox" id="mat1" name="vehicle1" value="Bike">
+            <label for="mat1"> Debit Card</label><br>
+            <input type="checkbox" id="mat2" name="vehicle2" value="Car">
+            <label for="mat2">Credit Card</label><br>
+            <input type="checkbox" id="mat3" name="vehicle3" value="Boat">
+            <label for="mat3"> Cheque Book</label><br>
+            <input type="checkbox" id="mat4" name="vehicle3" value="Boat">
+            <label for="mat4"> Netbanking</label><br><br>
+
+           <a href="{% url 'message' %}" class="btn btn-secondary btn_block my_custom_button">Submit</a>
+            <a href="{% url 'logout' %}" class="btn btn-secondary btn_block my_custom_button">logout</a>
+
+        </form>
+
+
+    <br>
+
+  </div>
+   </div>
+  </div>
+</div>
+ <script>
+$(document).ready(function(){
+
+ var department = $("#department");
+ var Employee = $("#Employee");
+ var $options = Employee.find('option');
+ department.on('change',function(){
+    Employee.html($options.filter('[value="'+ this.value  +'"]'));
+ }).trigger('change');
+
+
+});
+</script>
+
+
+
+
+</body>
+</html>
